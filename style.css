@@ -116,6 +116,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
+    font-weight: 600;
 }
 
 .card-body {
@@ -173,8 +174,9 @@ body {
 /* Details */
 .details {
     margin-top: 10px;
-    color: #666;
-    font-size: 13px;
+    color: #222;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .stars {
@@ -224,4 +226,5 @@ body {
     margin-bottom: 4px;
 
 }
+
 
