@@ -125,11 +125,12 @@ body {
 }
 
 .label {
-    font-weight: 600;
-    font-size: 15px;
+    font-weight: bold;
+    font-size: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
+    color: #000; 
 }
 
 .status-pill {
@@ -143,19 +144,20 @@ body {
 .check-icon.active {
     background: var(--accent-green);
     color: white;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .card-subtext, .phone-number {
     margin: 5px 0 0 0;
-    font-size: 15px;
-    color: #333;
+    font-size: 16px;
+    font-weight: 600; 
+    color: #222;
 }
 
 .edit-link {
@@ -222,3 +224,4 @@ body {
     margin-bottom: 4px;
 
 }
+
