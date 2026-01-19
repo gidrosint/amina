@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Interface Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="phone-container">
+        <header class="header">
+            <div class="top-bar">
+                <div class="user-info">
+                    <div class="avatar-placeholder">
+                        <i class='bx bx-user'></i>
+                        <span class="badge">5</span>
+                    </div>
+                    <div class="user-text">
+                        <span class="title">КИГ:  *</span>
+                        <span class="subtitle">******</span>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="icon-btn"><i class='bx bx-bell'></i></button>
+                    <button class="icon-btn"><i class='bx bx-cog'></i></button>
+                </div>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="label"><i class='bx bx-map-pin'></i> Геолокация</div>
+                    <div class="status-pill">Передана: . .** :**</div>
+                </div>
+                <div class="card-body">
+                    <p>Геолокация передана</p>
+                    <div class="check-icon active"><i class='bx bx-check'></i></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="label"><i class='bx bx-user-circle'></i> Аутентификация</div>
+                    <div class="check-icon active"><i class='bx bx-check'></i></div>
+                </div>
+                <p class="card-subtext">Проверка пройдена</p>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="label"><i class='bx bx-edit'></i> Постановка на учет</div>
+                    <div class="check-icon active"><i class='bx bx-check'></i></div>
+                </div>
+                <p class="card-subtext">Вы состоите на учете</p>
+            </div>
+
+            <div class="card detail-card">
+                <div class="card-header">
+                    <div class="label"><i class='bx bx-buildings'></i> Место сна и отдыха</div>
+                    <div class="edit-link"><i class='bx bx-pencil'></i> Изменить</div>
+                    <div class="check-icon active"><i class='bx bx-check'></i></div>
+                </div>
+                <div class="details">
+                    <p class="caption">Населенный пункт:</p>
+                    <p class="stars">**********</p>
+                    <div class="row">
+                        <span>Улица: ****</span>
+                    </div>
+                    <div class="row">
+                        <span>Дом: ***</span>
+                        <span>Квартира: ***</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="label"><i class='bx bx-phone'></i> Номер телефона</div>
+                    <div class="edit-link"><i class='bx bx-pencil'></i> Изменить</div>
+                    <div class="check-icon active"><i class='bx bx-check'></i></div>
+                </div>
+                <p class="phone-number">+* (*) *--</p>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <div class="nav-item">
+                <i class='bx bx-user'></i>
+
+           <span>Профиль</span>
+            </div>
+            <div class="nav-item active-nav">
+                <div class="home-circle">
+                    <i class='bx bx-home-alt'></i>
+                </div>
+                <span>Главная</span>
+            </div>
+            <div class="nav-item">
+                <i class='bx bx-grid-alt'></i>
+                <span>Сервисы</span>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>
