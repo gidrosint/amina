@@ -1,42 +1,52 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Interface</title>
+    <title>App Interface</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
+        /* --- Сброс и Переменные --- */
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
         :root {
-            --bg-color: #f0f7f9;
+            --bg-color: #f0f7f9; /* Светло-голубой фон */
             --card-bg: #ffffff;
-            --accent-green: #22c55e;
-            --text-main: #222;
-            --text-secondary: #7a869a;
+            --accent-green: #22c55e; /* Зеленый цвет галочек */
+            --text-dark: #222;
+            --text-gray: #7a869a;
         }
 
         body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #e0e0e0;
+            background-color: #333; /* Темный фон за телефоном */
             display: flex;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
+        /* --- Корпус телефона --- */
         .phone-container {
             width: 375px;
             height: 812px;
             background-color: var(--bg-color);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 40px; /* Скругление экрана */
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
         }
 
-        /* --- Header --- */
+        /* --- Шапка (Header) --- */
         .header {
+            padding: 50px 20px 15px 20px; /* Отступ сверху под челку */
             background: linear-gradient(to bottom, #d9ebf5, #f0f7f9);
-            padding: 40px 20px 15px 20px;
         }
 
         .top-bar {
@@ -51,56 +61,96 @@
             gap: 12px;
         }
 
-        .avatar-placeholder {
-            width: 45px;
-            height: 45px;
+        .avatar-box {
+            position: relative;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: white;
+            background: #fff;
             border: 1px solid #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             font-size: 24px;
+            color: #444;
         }
 
         .badge {
             position: absolute;
             top: -2px;
             right: -2px;
-            background: #444;
+            background: #555;
             color: white;
             font-size: 10px;
-            padding: 2px 5px;
-            border-radius: 10px;
-        }
-
-        .icon-btn {
-            background: white;
-            border: none;
-            width: 35px;
-            height: 35px;
+            font-weight: bold;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 2px solid #fff;
         }
 
-        /* --- Content --- */
+        /* Текст в шапке (КИГ и Имя) */
+        .user-text {
+            display: flex;
+            flex-direction: column; /* ЭТО СТАВИТ ИМЯ ПОД НОМЕР */
+            justify-content: center;
+        }
+
+        .kig-text {
+            font-size: 19px;
+            font-weight: 800; /* Очень жирный */
+            color: #111;
+            line-height: 1.2;
+        }
+
+        .name-text {
+            font-size: 14px;
+            font-weight: 700;
+            color: #666; /* Серый цвет имени */
+            text-transform: uppercase;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        /* --- Контент --- */
         .content {
-            padding: 15px;
             flex: 1;
             overflow-y: auto;
-            padding-bottom: 90px;
+            padding: 15px;
+            padding-bottom: 90px; /* Место под нижнее меню */
+            /* Скрываем скроллбар */
+            scrollbar-width: none; 
         }
+        .content::-webkit-scrollbar { display: none; }
 
+/* --- Карточки --- */
         .card {
             background: var(--card-bg);
             border-radius: 16px;
             padding: 16px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
 
         .card-header {
@@ -110,159 +160,220 @@
             margin-bottom: 8px;
         }
 
-        /* --- Текст на Главной (Жирный) --- */
+        /* Заголовки карточек (с иконкой) */
         .label-main {
-            font-weight: 700;
-            font-size: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #000;
+            font-weight: 700;
+            font-size: 15px;
+            color: #333;
         }
 
-        .card-body p, .phone-number, .card-subtext, .details p, .details span {
-            font-weight: 700 !important;
-            color: #222 !important;
-            font-size: 16px;
-            margin: 5px 0 0 0;
-            line-height: 1.4;
+        .label-main i {
+            font-size: 18px;
+            color: #555;
         }
 
-        .phone-number {
-            font-size: 18px !important;
-        }
-
+        /* Зеленая таблетка статуса */
         .status-pill {
             background: var(--accent-green);
             color: white;
             font-size: 10px;
-            padding: 4px 10px;
-            border-radius: 20px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 6px;
         }
 
-        .check-icon.active {
+        /* Галочка в круге */
+        .check-circle {
+            width: 24px;
+            height: 24px;
             background: var(--accent-green);
-            color: white;
-            width: 26px;
-            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            color: white;
+            font-size: 16px;
         }
 
-.edit-link {
-            font-size: 12px;
-            color: #888;
-            margin-left: auto;
-            margin-right: 10px;
+        /* Кнопка изменить */
+        .edit-btn {
             display: flex;
             align-items: center;
             gap: 4px;
-        }
-
-        /* --- Стили Профиля --- */
-        .profile-title {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #444;
-        }
-
-        .info-label {
-            color: var(--text-secondary);
             font-size: 12px;
-            display: block;
-            margin-bottom: 2px;
-            font-weight: 400;
+            color: #7a869a;
+            font-weight: 500;
+            margin-left: auto; /* Прижимает вправо */
+            margin-right: 10px;
         }
 
-        .info-value {
+        /* --- Жирный текст контента --- */
+        .bold-text {
             font-weight: 700;
             font-size: 16px;
-            color: #333;
-            display: block;
+            color: #222;
+            margin: 0;
+            line-height: 1.4;
         }
 
-        .menu-item {
+        .sub-text {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .phone-large {
+            font-size: 18px;
+            font-weight: 800;
+            color: #222;
+            margin-top: 5px;
+        }
+
+        /* --- Страница Профиля --- */
+        .profile-title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            margin-bottom: 12px;
+        }
+        .info-label {
+            display: block;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 2px;
+        }
+        .info-val {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        /* Блок с КИГ и QR */
+        .kig-card-flex {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 15px;
         }
 
+        .red-card {
+            width: 160px;
+            height: 100px;
+            background: linear-gradient(135deg, #a61c1c, #630505);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* --- QR Код (Исправленный) --- */
+        .qr-box {
+            width: 90px;
+            height: 90px;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 8px; /* Отступ внутри, чтобы код не прилипал */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Картинка вписывается, не обрезается */
+        }
+
+.zoom-icon {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Меню профиля */
+        .menu-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
         .menu-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-
         .menu-icon {
             font-size: 24px;
             color: var(--accent-green);
         }
-
-        .qr-box {
-            width: 80px;
-            height: 80px;
-            background: #f8f9fa;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 45px;
+        .menu-text {
+            font-weight: 700;
+            font-size: 15px;
             color: #333;
-            position: relative;
         }
 
-        .zoom-icon {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        /* --- Навигация --- */
+        /* --- Нижняя навигация --- */
         .bottom-nav {
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 75px;
+            height: 80px;
+            background: #fff;
             border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 10;
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 13px;
             color: #999;
-            flex: 1;
+            font-size: 12px;
             cursor: pointer;
+            width: 60px;
         }
 
         .nav-item i {
             font-size: 26px;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
-        .active-nav {
+        .nav-item.active {
             color: var(--accent-green);
         }
 
-        .home-circle {
+        /* Центральная кнопка домой */
+        .nav-home-circle {
             width: 55px;
             height: 55px;
             background: #fff;
@@ -271,26 +382,32 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: -35px;
+            margin-top: -30px; /* Выпирает вверх */
             font-size: 30px;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+            color: var(--accent-green);
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.2);
         }
-
+        
+        /* Логика скрытия страниц */
         .page { display: none; }
         .page.active { display: block; }
+
     </style>
 </head>
 <body>
 
 <div class="phone-container">
-    
+
     <header class="header" id="main-header">
         <div class="top-bar">
             <div class="user-info">
-                <div class="avatar-placeholder"><i class='bx bx-user'></i><span class="badge">5</span></div>
+                <div class="avatar-box">
+                    <i class='bx bx-user'></i>
+                    <div class="badge">5</div>
+                </div>
                 <div class="user-text">
-                    <span style="font-weight:bold; font-size:14px; display:block;">КИГ: GFTRJGYGF</span>
-                    <span style="font-size:12px; color:#666;">АМИР</span>
+                    <span class="kig-text">КИГ: AB0216659</span>
+                    <span class="name-text">АЗАМАТ</span>
                 </div>
             </div>
             <div class="actions">
@@ -300,46 +417,50 @@
         </div>
     </header>
 
-<main class="content">
+    <main class="content">
+        
         <div id="home-page" class="page active">
+            
             <div class="card">
                 <div class="card-header">
                     <div class="label-main"><i class='bx bx-map-pin'></i> Геолокация</div>
-                    <div class="status-pill">Передана: 01 : 01</div>
+                    <div class="status-pill">Передана: 20.01.2026 02:02</div>
                 </div>
-                <div class="card-body" style="display:flex; justify-content:space-between; align-items:center;">
-                    <p>Геолокация передана</p>
-                    <div class="check-icon active"><i class='bx bx-check'></i></div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <p class="bold-text">Геолокация передана</p>
+                    <div class="check-circle"><i class='bx bx-check'></i></div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header" style="margin-bottom:0;">
+
+<div class="card-header">
                     <div class="label-main"><i class='bx bx-user-circle'></i> Аутентификация</div>
-                    <div class="check-icon active"><i class='bx bx-check'></i></div>
+                    <div class="check-circle"><i class='bx bx-check'></i></div>
                 </div>
-                <p class="card-subtext">Проверка пройдена</p>
+                <p class="sub-text" style="font-weight:700; color:#444;">Проверка пройдена. Открыт доступ к личным данным.</p>
             </div>
 
             <div class="card">
-                <div class="card-header" style="margin-bottom:0;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
                     <div class="label-main"><i class='bx bx-edit'></i> Постановка на учет</div>
-                    <div class="check-icon active"><i class='bx bx-check'></i></div>
+                    <div class="check-circle"><i class='bx bx-check'></i></div>
                 </div>
-                <p class="card-subtext">Вы состоите на учете</p>
+                <p class="bold-text" style="margin-top:5px;">Вы состоите на учете</p>
             </div>
 
             <div class="card">
                 <div class="card-header">
                     <div class="label-main"><i class='bx bx-buildings'></i> Место сна и отдыха</div>
-                    <div class="edit-link"><i class='bx bx-pencil'></i> Изменить</div>
-                    <div class="check-icon active"><i class='bx bx-check'></i></div>
+                    <div class="edit-btn"><i class='bx bx-pencil'></i> Изменить</div>
+                    <div class="check-circle"><i class='bx bx-check'></i></div>
                 </div>
-                <div class="details">
-                    <p>Адрес: Россия, Московская область, городской округ Электросталь, поселок Новые дома, 8</p>
-                    <div style="display:flex; gap:20px; margin-top:5px;">
-                        <span>Дом: 2</span>
-                        <span>Квартира: 16</span>
+                <div style="margin-top:5px;">
+                    <span class="sub-text">Адрес:</span>
+                    <p class="bold-text">Россия, Московская область, городской округ Электросталь, посёлок Новые Дома, 8</p>
+                    <div style="margin-top:8px; display:flex; gap:15px;">
+                        <span class="bold-text">Дом: 8</span>
+                        <span class="bold-text">Квартира: 82</span>
                     </div>
                 </div>
             </div>
@@ -347,111 +468,125 @@
             <div class="card">
                 <div class="card-header">
                     <div class="label-main"><i class='bx bx-phone'></i> Номер телефона</div>
-                    <div class="edit-link"><i class='bx bx-pencil'></i> Изменить</div>
-                    <div class="check-icon active"><i class='bx bx-check'></i></div>
+                    <div class="edit-btn"><i class='bx bx-pencil'></i> Изменить</div>
+                    <div class="check-circle"><i class='bx bx-check'></i></div>
                 </div>
-                <p class="phone-number">+7 (977) 9999</p>
+                <p class="phone-large">+7 977 888-15-02</p>
             </div>
+
         </div>
+
 
         <div id="profile-page" class="page">
             <div class="profile-title">Профиль</div>
-            
+
             <div class="card">
-                <div style="margin-bottom:15px;">
+                <div class="info-row">
                     <span class="info-label">ФИО</span>
-                    <span class="info-value">АЗАМАТ М М</span>
+                    <span class="info-val">АЗАМАТ</span>
                 </div>
-                <div>
+                <div class="info-row">
                     <span class="info-label">Гражданство</span>
-                    <span class="info-value">Кыргызстан</span>
+                    <span class="info-val">Кыргызстан</span>
                 </div>
             </div>
 
             <div class="card">
-                <span class="info-label" style="font-size:14px; color:#444; margin-bottom:15px;">Карта иностранного гражданина</span>
-                <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+                <span class="sub-text" style="font-weight:600;">Карта иностранного гражданина</span>
+                
+                <div style="display:flex; justify-content:space-between; margin-top:10px;">
                     <div>
                         <span class="info-label">Номер КИГ</span>
-                        <span class="info-value">AB0216659</span>
+                        <span class="info-val">AB0216659</span>
                     </div>
                     <div style="text-align:right;">
-                        <span class="info-label">Срок действия КИГ:</span>
-                        <span class="info-value">01.09.2030</span>
+                        <span class="info-label">Срок действия:</span>
+                        <span class="info-val">01.09.2030</span>
                     </div>
+                </div>
 
-</div>
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div style="width:150px; height:95px; background:linear-gradient(135deg, #8b0000, #4a0000); border-radius:8px; display:flex; align-items:center; justify-content:center; color:white; font-size:10px; text-align:center; padding:5px;">КАРТА ИНОСТРАННОГО ГРАЖДАНИНА</div>
+                <div class="kig-card-flex">
+                    <div class="red-card">
+                        КАРТА<br>ИНОСТРАННОГО<br>ГРАЖДАНИНА
+                    </div>
+                    
                     <div class="qr-box">
-                        <i class='bx bx-qr-scan'></i>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=AB0216659" alt="QR">
                         <div class="zoom-icon"><i class='bx bx-search-alt'></i></div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="menu-item">
+<div class="card">
+                <div class="menu-row">
                     <div class="menu-left">
                         <i class='bx bx-user-circle menu-icon'></i>
-                        <span style="font-weight:600;">Личные данные</span>
+                        <span class="menu-text">Личные данные</span>
                     </div>
-                    <i class='bx bx-chevron-right' style="color:#ccc; font-size:24px;"></i>
+                    <i class='bx bx-chevron-right' style="font-size:24px; color:#ccc;"></i>
                 </div>
             </div>
 
             <div class="card">
-                <div class="menu-item">
+                <div class="menu-row">
                     <div class="menu-left">
                         <i class='bx bx-file menu-icon'></i>
-                        <span style="font-weight:600;">Документы</span>
+                        <span class="menu-text">Документы</span>
                     </div>
-                    <i class='bx bx-chevron-right' style="color:#ccc; font-size:24px;"></i>
+                    <i class='bx bx-chevron-right' style="font-size:24px; color:#ccc;"></i>
                 </div>
             </div>
+
         </div>
     </main>
 
     <nav class="bottom-nav">
-        <div class="nav-item" id="nav-profile">
+        <div class="nav-item" id="btn-profile">
             <i class='bx bx-user'></i>
             <span>Профиль</span>
         </div>
-        <div class="nav-item active-nav" id="nav-home">
-            <div class="home-circle"><i class='bx bx-home-alt'></i></div>
-            <span>Главная</span>
+        
+        <div class="nav-item active" id="btn-home">
+            <div class="nav-home-circle"><i class='bx bx-home-alt'></i></div>
+            <span style="margin-top:4px;">Главная</span>
         </div>
+        
         <div class="nav-item">
             <i class='bx bx-grid-alt'></i>
             <span>Сервисы</span>
         </div>
     </nav>
+
 </div>
 
 <script>
+    // Логика переключения страниц
     const homePage = document.getElementById('home-page');
     const profilePage = document.getElementById('profile-page');
-    const mainHeader = document.getElementById('main-header');
-    const btnHome = document.getElementById('nav-home');
-    const btnProfile = document.getElementById('nav-profile');
+    const btnHome = document.getElementById('btn-home');
+    const btnProfile = document.getElementById('btn-profile');
+    const header = document.getElementById('main-header');
 
     btnProfile.onclick = function() {
         homePage.classList.remove('active');
         profilePage.classList.add('active');
-        mainHeader.style.display = 'none';
-        btnProfile.classList.add('active-nav');
-        btnHome.classList.remove('active-nav');
-    }
+        
+        btnHome.classList.remove('active');
+        btnProfile.classList.add('active');
+        
+        // Скрываем шапку в профиле, если нужно (как на многих скринах), 
+        // или оставляем. На фото в профиле шапка есть, но другая. 
+        // Оставим пока эту.
+    };
 
     btnHome.onclick = function() {
         profilePage.classList.remove('active');
         homePage.classList.add('active');
-        mainHeader.style.display = 'block';
-        btnHome.classList.add('active-nav');
-        btnProfile.classList.remove('active-nav');
-    }
+        
+        btnProfile.classList.remove('active');
+        btnHome.classList.add('active');
+    };
 </script>
 
 </body>
 </html>
-
